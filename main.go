@@ -1,0 +1,55 @@
+package main
+
+import (
+	"log"
+	"os"
+
+	"github.com/joho/godotenv"
+)
+
+func main() {
+	// Load environment variables from .env file if present
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, using environment variables")
+	}
+
+	// Retrieve configuration from environment
+	port := getEnv("PORT", "8080")
+	dsHost := getEnv("DS_HOST", "")
+	dsPort := getEnv("DS_PORT", "5000")
+	dsUser := getEnv("DS_USER", "")
+	dsPass := getEnv("DS_PASS", "")
+
+	if dsHost == "" {
+		log.Fatal("DS_HOST environment variable is required")
+	}
+	if dsUser == "" {
+		log.Fatal("DS_USER environment variable is required")
+	}
+	if dsPass == "" {
+		log.Fatal("DS_PASS environment variable is required")
+	}
+
+	cfg := &Config{
+		Port:   port,
+		DSHost: dsHost,
+		DSPort: dsPort,
+		DSUser: dsUser,
+		DSPass: dsPass,
+	}
+
+	server := NewServer(cfg)
+
+	log.Printf("Starting ds2api server on port %s", port)
+	if err := server.Run(); err != nil {
+		log.Fatalf("Server failed to start: %v", err)
+	}
+}
+
+// getEnv retrieves an environment variable or returns a fallback default value.
+func getEnv(key, fallback string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+	return fallback
+}
