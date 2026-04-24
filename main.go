@@ -41,6 +41,7 @@ func main() {
 	server := NewServer(cfg)
 
 	log.Printf("Starting ds2api server on port %s", port)
+	log.Printf("Connecting to Synology at %s:%s", dsHost, dsPort)
 	if err := server.Run(); err != nil {
 		log.Fatalf("Server failed to start: %v", err)
 	}
