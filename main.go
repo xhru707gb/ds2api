@@ -14,7 +14,7 @@ func main() {
 	}
 
 	// Retrieve configuration from environment
-	port := getEnv("PORT", "8080")
+	port := getEnv("PORT", "3000") // changed default from 8080 to 3000 to avoid conflicts on my machine
 	dsHost := getEnv("DS_HOST", "")
 	dsPort := getEnv("DS_PORT", "5000")
 	dsUser := getEnv("DS_USER", "")
