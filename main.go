@@ -16,7 +16,7 @@ func main() {
 	// Retrieve configuration from environment
 	port := getEnv("PORT", "3000") // changed default from 8080 to 3000 to avoid conflicts on my machine
 	dsHost := getEnv("DS_HOST", "")
-	dsPort := getEnv("DS_PORT", "5000")
+	dsPort := getEnv("DS_PORT", "5001") // my NAS uses 5001 (HTTPS) instead of 5000 (HTTP)
 	dsUser := getEnv("DS_USER", "")
 	dsPass := getEnv("DS_PASS", "")
 
