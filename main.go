@@ -42,6 +42,7 @@ func main() {
 
 	log.Printf("Starting ds2api server on port %s", port)
 	log.Printf("Connecting to Synology at %s:%s", dsHost, dsPort)
+	log.Printf("Build: personal fork - https://github.com/me/ds2api")
 	if err := server.Run(); err != nil {
 		log.Fatalf("Server failed to start: %v", err)
 	}
